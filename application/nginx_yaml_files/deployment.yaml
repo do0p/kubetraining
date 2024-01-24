@@ -19,6 +19,7 @@ spec:
         image: kimschles/pod-info-app:0.0.5
         ports:
         - containerPort: 3000
+          name: podinfo 
         env:
           - name: POD_NAME
             valueFrom:
