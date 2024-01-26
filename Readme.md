@@ -44,6 +44,9 @@ kubectl get nodes
 kubectl create namespace argocd
 kubectl get ns
 
+# Install nginx-ingress
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.8.2/deploy/static/provider/cloud/deploy.yaml
+
 # Install argocd
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 kubectl get deployment -n argocd
@@ -53,7 +56,10 @@ kubectl get all -n argocd
 # After Deployment is complete
 # Expose argocd-server
 kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "NodePort"}}'
-kubectl port-forward svc/argocd-server -n argocd 8080:443 &
+kubectl port-forward svc/argocd-server -n argocd 8080:443 
+
+# Expose ingress
+kubectl port-forward svc/ingress-nginx-controller -n ingress-nginx 8085:80
 
 # Retreive argocd admin password from kubernetes secrets
 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d && echo
