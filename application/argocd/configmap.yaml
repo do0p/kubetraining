@@ -6,8 +6,6 @@ metadata:
     app.kubernetes.io/part-of: argocd
   name: argocd-cm
   namespace: argocd
-  resourceVersion: "971"
-  uid: dcb93ae5-a3f3-4164-9856-ec9e32281c12
 data:
  resource.customizations: |
     networking.k8s.io/Ingress:
