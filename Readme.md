@@ -1,4 +1,4 @@
-# How to setup Kubernetes and Argocd on WSL2
+# Setup Kubernetes and Argocd on WSL2
 This guide should help getting a kubernetes installation running locally on a Windows machine and accessible via WSL.
 
 ## Install Docker and Minikube on WSL
@@ -68,6 +68,9 @@ kubectl get statefulset -n argocd
 kubectl get all -n argocd
 
 # After Deployment is complete
+# Updated the argocd-cm configmap
+kubectl apply -f application/argocd/configmap.yaml
+
 # Expose argocd-server
 kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "NodePort"}}'
 kubectl port-forward svc/argocd-server -n argocd 8080:443 
@@ -90,4 +93,10 @@ rm argocd-linux-amd64
 # Test argocd
 argocd version
 argocd version --client
+```
+
+
+# Deploy via argocd 
+```
+kubectl apply -f application/argocd/application.yaml
 ```
