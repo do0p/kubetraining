@@ -10,6 +10,7 @@ This guide should help getting a kubernetes installation running locally on a Wi
 
 ### Install Minikube on WSL
 * Install [Minikube](https://minikube.sigs.k8s.io/docs/start/).
+* If you have problems with tls, try to [setup ca certificates](https://minikube.sigs.k8s.io/docs/handbook/untrusted_certs/).
 
 ## Install Docker and Minikube on Windows
 Alternatively docker and minikube can also be installed on Windows and then used from WSL.
