@@ -42,7 +42,7 @@ metadata:
   name: dev-k8s-pod-info-service-c85d2121
 spec:
   ports:
-    - name: podinfo-service-port
+    - name: service-port
       port: 80
       protocol: TCP
       targetPort: podinfo-port
@@ -75,6 +75,6 @@ spec:
               service:
                 name: dev-k8s-pod-info-service-c85d2121
                 port:
-                  name: podinfo-service-port
+                  name: service-port
             path: /podinfo
             pathType: Prefix
