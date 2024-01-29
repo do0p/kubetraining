@@ -9,7 +9,8 @@ class MyChart extends Chart {
     // Define a Kubernetes Deployment
     new KubeDeployment(this, 'pod-info', {
       metadata: {
-        labels: { app: appLabel }
+        labels: { app: appLabel },
+        namespace: ns
       },
       spec: {
         replicas: 3,
@@ -48,7 +49,8 @@ class MyChart extends Chart {
 
     const service = new KubeService(this, "pod-info-service", {
       metadata: {
-        labels: { app: appLabel }
+        labels: { app: appLabel },
+        namespace: ns
       },
       spec: {
         selector: { app: 'pod-info' },
@@ -64,14 +66,16 @@ class MyChart extends Chart {
     const ingressClass = new KubeIngressClass(this, "nginx-ingress", {
       metadata: {
         labels: { app: appLabel },
-        annotations: { 'ingressclass.kubernetes.io/is-default-class': 'true' }
+        annotations: { 'ingressclass.kubernetes.io/is-default-class': 'true' },
+        namespace: ns
       },
       spec: { controller: 'k8s.io/ingress-nginx' }
     });
 
     new KubeIngress(this, "pod-info-ingress", {
       metadata: {
-        annotations: { 'nginx.ingress.kubernetes.io/rewrite-target': '/' }
+        annotations: { 'nginx.ingress.kubernetes.io/rewrite-target': '/' },
+        namespace: ns
       },
       spec: {
         ingressClassName: ingressClass.name,

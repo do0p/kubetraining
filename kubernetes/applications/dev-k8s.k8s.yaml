@@ -4,6 +4,7 @@ metadata:
   labels:
     app: pod-info
   name: dev-k8s-pod-info-c8b8d7b5
+  namespace: dev-k8s
 spec:
   replicas: 3
   selector:
@@ -40,6 +41,7 @@ metadata:
   labels:
     app: pod-info
   name: dev-k8s-pod-info-service-c85d2121
+  namespace: dev-k8s
 spec:
   ports:
     - name: service-port
@@ -57,6 +59,7 @@ metadata:
   labels:
     app: pod-info
   name: dev-k8s-nginx-ingress-c8bfe3b1
+  namespace: dev-k8s
 spec:
   controller: k8s.io/ingress-nginx
 ---
@@ -66,6 +69,7 @@ metadata:
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
   name: dev-k8s-pod-info-ingress-c83354ae
+  namespace: dev-k8s
 spec:
   ingressClassName: dev-k8s-nginx-ingress-c8bfe3b1
   rules:
