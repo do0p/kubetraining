@@ -9,7 +9,7 @@ spec:
     namespace: dev
   project: default
   source:
-    path: kubernetes/applications/dev-k8s.ka8s.yaml
+    path: kubernetes/applications
     repoURL: https://github.com/do0p/kubetraining.git
     targetRevision: HEAD
   syncPolicy:

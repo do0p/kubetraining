@@ -75,6 +75,6 @@ spec:
               service:
                 name: dev-k8s-pod-info-service-c85d2121
                 port:
-                  name: podInfoServicePort
+                  number: 80
             path: /podinfo
             pathType: Prefix
