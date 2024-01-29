@@ -23,7 +23,7 @@ class MyChart extends Chart {
                 image: 'kimschles/pod-info-app:0.0.5',
                 ports: [{
                   containerPort: 3000,
-                  name: 'podInfoPort'
+                  name: 'podinfo-port'
                 }],
                 env: [
                   {
@@ -55,8 +55,8 @@ class MyChart extends Chart {
         ports: [{
           protocol: 'TCP',
           port: 80,
-          name: 'podInfoServicePort',
-          targetPort: IntOrString.fromString('podInfoPort')
+          name: 'podinfo-service-port',
+          targetPort: IntOrString.fromString('podinfo-port')
         }]
       }
     });
@@ -83,7 +83,7 @@ class MyChart extends Chart {
               backend: {
                 service: {
                   name: service.name,
-                  port: { number: 80 }
+                  port: { name: 'podinfo-service-port' }
                 }
               }
             }]
