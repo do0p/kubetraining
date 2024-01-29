@@ -6,7 +6,6 @@ metadata:
 spec:
   destination:
     name: in-cluster
-    namespace: dev
   project: default
   source:
     path: kubernetes/applications
