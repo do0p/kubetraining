@@ -1,0 +1,30 @@
+name: infra cdk8s workflow
+on:
+  pull_request:
+    paths:
+      - '/cdk8s/**'
+  push:
+    paths:
+      - '/cdk8s/**'
+  
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y npm
+
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Build cdk8s
+        run: |
+          npm install
+          npm run build
