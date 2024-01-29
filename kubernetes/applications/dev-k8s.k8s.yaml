@@ -1,0 +1,80 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: pod-info
+  name: dev-k8s-pod-info-c8b8d7b5
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: pod-info
+  template:
+    metadata:
+      labels:
+        app: pod-info
+    spec:
+      containers:
+        - env:
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: POD_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: POD_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+          image: kimschles/pod-info-app:0.0.5
+          name: pod-info
+          ports:
+            - containerPort: 3000
+              name: podInfoPort
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: pod-info
+  name: dev-k8s-pod-info-service-c85d2121
+spec:
+  ports:
+    - name: podInfoServicePort
+      port: 80
+      protocol: TCP
+      targetPort: podInfoPort
+  selector:
+    app: pod-info
+---
+apiVersion: networking.k8s.io/v1
+kind: IngressClass
+metadata:
+  annotations:
+    ingressclass.kubernetes.io/is-default-class: "true"
+  labels:
+    app: pod-info
+  name: dev-k8s-nginx-ingress-c8bfe3b1
+spec:
+  controller: k8s.io/ingress-nginx
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+  name: dev-k8s-pod-info-ingress-c83354ae
+spec:
+  ingressClassName: dev-k8s-nginx-ingress-c8bfe3b1
+  rules:
+    - http:
+        paths:
+          - backend:
+              service:
+                name: dev-k8s-pod-info-service-c85d2121
+                port:
+                  name: podInfoServicePort
+            path: /podinfo
+            pathType: Prefix
