@@ -6,7 +6,6 @@ class MyChart extends Chart {
   constructor(scope: Construct, ns: string, appLabel: string) {
     super(scope, ns);
 
-    // Define a Kubernetes Deployment
     new KubeDeployment(this, 'pod-info', {
       metadata: {
         labels: { app: appLabel },
