@@ -32,7 +32,7 @@ spec:
           name: pod-info
           ports:
             - containerPort: 3000
-              name: podInfoPort
+              name: podinfo-port
 ---
 apiVersion: v1
 kind: Service
@@ -42,10 +42,10 @@ metadata:
   name: dev-k8s-pod-info-service-c85d2121
 spec:
   ports:
-    - name: podInfoServicePort
+    - name: podinfo-service-port
       port: 80
       protocol: TCP
-      targetPort: podInfoPort
+      targetPort: podinfo-port
   selector:
     app: pod-info
 ---
@@ -75,6 +75,6 @@ spec:
               service:
                 name: dev-k8s-pod-info-service-c85d2121
                 port:
-                  number: 80
+                  name: podinfo-service-port
             path: /podinfo
             pathType: Prefix
