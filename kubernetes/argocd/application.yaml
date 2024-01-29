@@ -9,7 +9,7 @@ spec:
     namespace: dev
   project: default
   source:
-    path: application/nginx_yaml_files
+    path: kubernetes/pod-info
     repoURL: https://github.com/do0p/kubetraining.git
     targetRevision: HEAD
   syncPolicy:

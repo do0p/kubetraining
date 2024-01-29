@@ -70,7 +70,7 @@ kubectl get all -n argocd
 
 # After Deployment is complete
 # Updated the argocd-cm configmap
-kubectl apply -f application/argocd/configmap.yaml
+kubectl apply -f kubernetes/argocd/configmap.yaml
 
 # Expose argocd-server
 kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "NodePort"}}'
@@ -99,5 +99,5 @@ argocd version --client
 
 # Deploy via argocd 
 ```
-kubectl apply -f application/argocd/application.yaml
+kubectl apply -f kubernetes/argocd/application.yaml
 ```
