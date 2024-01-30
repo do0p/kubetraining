@@ -14,7 +14,6 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -47,15 +46,20 @@ jobs:
         shell: bash
 
       - name: Commit changes
+        if: github.ref == 'refs/heads/main'
         working-directory: 'kubernetes/applications'
         run: |
           git config --global --add safe.directory /github/workspace
           git config --global user.email dbrandl72@gmail.com
           git config --global user.name do0b
           git add .
-          git commit -m "Code change"
-          remote_repo="https://${GITHUB_ACTOR}:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git"
-          echo "${remote_repo}"
-          git push "${remote_repo}"
+          if git diff --quiet; then
+            echo "No changes to commit."
+          else
+            echo "There are changes to commit."
+            git commit -m "Code change"
+            remote_repo="https://${GITHUB_ACTOR}:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git"
+            git push "${remote_repo}"
+          fi
       
       
