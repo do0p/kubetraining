@@ -53,7 +53,7 @@ jobs:
           git config --global user.email dbrandl72@gmail.com
           git config --global user.name do0b
           git add .
-          if git diff --quiet; then
+          if git diff github.ref_name --quiet; then
             echo "No changes to commit."
           else
             echo "There are changes to commit."
