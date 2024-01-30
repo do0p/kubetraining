@@ -6,7 +6,7 @@ metadata:
   name: dev-k8s-pod-info-c8b8d7b5
   namespace: dev-k8s
 spec:
-  replicas: 2
+  replicas: 5
   selector:
     matchLabels:
       app: pod-info
