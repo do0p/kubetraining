@@ -48,7 +48,7 @@ jobs:
 
       - name: Commit changes
         run: |
-          git config --global --add safe.directory '*'
+          git config --global --add safe.directory /
           git config --global user.email "dbrandl72@gmail.com"
           git config --global user.name "do0b"
           git add "kubernetes/applications"
