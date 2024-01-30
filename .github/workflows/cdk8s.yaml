@@ -46,10 +46,14 @@ jobs:
           npm run synth
         shell: bash
 
-      - name: push
+      - name: Commit changes
         run: |
-          git status
-          git add kubernetes/applications
-          git commit -m "[SKIP CI] K8s manifest yaml files are created/updated"
-          git push
-        shell: bash      
+          git config user.email "dbrandl72@gmail.com"
+          git config user.name "do0b"
+          git add "kubernetes/applications"
+          git commit -m "Code change"
+      
+      - name: Push changes
+        uses: ad-m/github-push-action@v0.5.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }} 
