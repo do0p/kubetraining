@@ -49,7 +49,6 @@ jobs:
         if: github.ref == 'refs/heads/main'
         working-directory: 'kubernetes/applications'
         run: |
-          git config --global --add safe.directory /github/workspace
           git config --global user.email dbrandl72@gmail.com
           git config --global user.name do0b
           git add .
