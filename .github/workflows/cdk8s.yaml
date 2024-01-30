@@ -25,9 +25,22 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: '20.10.0'
 
-      - name: Build cdk8s
+      - name: Setup NPM
         run: |
-          npm install
-          npm run build
+          npm install -g npm@10.2.4
+          npm --version
+        shell: bash          
+
+      - name: Cdk8s Synth
+        working-directory: 'cdk8s'
+        run: |
+          if [[ -f package-lock.json ]]; then
+            npm ci
+          else
+            npm install
+          fi
+          npm run synth
+        shell: bash
+          
