@@ -48,8 +48,9 @@ jobs:
 
       - name: Commit changes
         run: |
-          git config user.email "dbrandl72@gmail.com"
-          git config user.name "do0b"
+          git config --global safe.directory '*'
+          git config --global user.email "dbrandl72@gmail.com"
+          git config --global user.name "do0b"
           git add "kubernetes/applications"
           git commit -m "Code change"
       
