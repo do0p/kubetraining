@@ -12,7 +12,7 @@ class MyChart extends Chart {
         namespace: ns
       },
       spec: {
-        replicas: 2,
+        replicas: 5,
         selector: { matchLabels: { app: appLabel } },
         template: {
           metadata: { labels: { app: appLabel } },
