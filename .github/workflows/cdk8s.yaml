@@ -55,6 +55,7 @@ jobs:
           git add .
           git commit -m "Code change"
           remote_repo="https://${GITHUB_ACTOR}:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git"
+          echo "${remote_repo}"
           git push "${remote_repo}"
       
       
