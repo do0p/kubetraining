@@ -11,8 +11,10 @@ on:
   workflow_dispatch:
   
 jobs:
-  ci:
+
+  build:
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -43,4 +45,11 @@ jobs:
           fi
           npm run synth
         shell: bash
-          
+
+      - name: push
+        run: |
+          git status
+          git add kubernetes/applications
+          git commit -m "[SKIP CI] K8s manifest yaml files are created/updated"
+          git push
+        shell: bash      
