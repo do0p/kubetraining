@@ -2,10 +2,13 @@ name: infra cdk8s workflow
 on:
   pull_request:
     paths:
-      - '/cdk8s/**'
+      - 'cdk8s/**'
   push:
+    branches:
+      - main
     paths:
-      - '/cdk8s/**'
+      - 'cdk8s/**'
+  workflow_dispatch:
   
 jobs:
   ci:
