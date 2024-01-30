@@ -56,7 +56,7 @@ class MyChart extends Chart {
         ports: [{
           protocol: 'TCP',
           port: 80,
-          name: 'serviceport',
+          name: 'service-port',
           targetPort: IntOrString.fromString('podinfo-port')
         }]
       }
@@ -86,7 +86,7 @@ class MyChart extends Chart {
               backend: {
                 service: {
                   name: service.name,
-                  port: { name: 'serviceport' }
+                  port: { name: 'service-port' }
                 }
               }
             }]
